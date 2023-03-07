@@ -1,7 +1,8 @@
-package com.imzcc.plugins.handler;
+package com.imzcc.plugins.controller.handler;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.imzcc.plugins.AFDianPay;
+import com.imzcc.plugins.command.AFDianCommand;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -27,9 +28,7 @@ public class AFDianPayHandler implements HttpHandler {
             Double parseDouble = Double.parseDouble(totalAmount);
             int amount = parseDouble.intValue();
             String playerName = order.getString("remark");
-
-            boolean b = AFDianPay.rechargePoints(playerName, amount);
-
+            boolean b = AFDianCommand.rechargePoints(playerName, amount);
             JSONObject object = new JSONObject();
             object.put("ec", 200);
             object.put("em", b);

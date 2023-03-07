@@ -2,14 +2,13 @@ package com.imzcc.plugins;
 
 import com.imzcc.plugins.config.Config;
 import com.imzcc.plugins.controller.AFDianPayController;
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
+import com.imzcc.plugins.excutor.AFDianExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
-public class AFDianPay extends JavaPlugin implements Listener {
+public class AFDianPay extends JavaPlugin {
     public static JavaPlugin instance;
     public static Logger LOGGER;
     static AFDianPayController afDianPayController;
@@ -18,6 +17,7 @@ public class AFDianPay extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 //        this.getServer().getPluginManager().registerEvents(this, this);
+        Objects.requireNonNull(getCommand("afdian")).setExecutor(new AFDianExecutor());
         LOGGER = getLogger();
         instance = this;
         LOGGER.info("AfadianPay has been enabled.");
@@ -30,7 +30,6 @@ public class AFDianPay extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        super.onDisable();
         afDianPayController.stop();
     }
 
@@ -38,14 +37,5 @@ public class AFDianPay extends JavaPlugin implements Listener {
         return instance;
     }
 
-    public static boolean rechargePoints(String playerName, int amount) {
-        int finalAmount = amount * Config.getMultiplier();
-        Bukkit.getScheduler().runTask(getInstance(), () -> {
-            if (StringUtils.isNotBlank(playerName)) {
-                LOGGER.info(String.format(" %s will recharge %d points", playerName, amount));
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("points give %s %d", playerName, finalAmount));
-            }
-        });
-        return true;
-    }
+
 }

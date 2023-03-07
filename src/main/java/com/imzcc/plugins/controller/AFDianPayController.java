@@ -2,7 +2,7 @@ package com.imzcc.plugins.controller;
 
 import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.config.Config;
-import com.imzcc.plugins.handler.AFDianPayHandler;
+import com.imzcc.plugins.controller.handler.AFDianPayHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
