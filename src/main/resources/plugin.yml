@@ -1,0 +1,5 @@
+name: AfadianPay
+version: 1.0
+main: com.imzcc.plugins.AfadianPay
+author: IMZCC
+api-version: 1.17
