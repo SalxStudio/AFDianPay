@@ -1,8 +1,7 @@
 package com.imzcc.plugins.handler;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.google.gson.JsonObject;
-import com.imzcc.plugins.AfadianPay;
+import com.imzcc.plugins.AFDianPay;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class AfadianPayHandler implements HttpHandler {
+public class AFDianPayHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equals(exchange.getRequestMethod())) {
@@ -19,7 +18,7 @@ public class AfadianPayHandler implements HttpHandler {
             byte[] bytes = new byte[is.available()];
             int read = is.read(bytes);
             String json = new String(bytes);
-            AfadianPay.LOGGER.info("Received data: " + json);
+            AFDianPay.LOGGER.info("Received data: " + json);
             JSONObject jsonObject = JSONObject.parseObject(json);
             Integer code = jsonObject.getInteger("ec");
             assert 200 == code : String.format("回调数据，code [%s] is not 200", code);
@@ -29,7 +28,7 @@ public class AfadianPayHandler implements HttpHandler {
             int amount = parseDouble.intValue();
             String playerName = order.getString("remark");
 
-            boolean b = AfadianPay.rechargePoints(playerName, amount);
+            boolean b = AFDianPay.rechargePoints(playerName, amount);
 
             JSONObject object = new JSONObject();
             object.put("ec", 200);

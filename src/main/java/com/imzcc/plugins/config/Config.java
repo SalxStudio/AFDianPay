@@ -1,6 +1,6 @@
 package com.imzcc.plugins.config;
 
-import com.imzcc.plugins.AfadianPay;
+import com.imzcc.plugins.AFDianPay;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -14,13 +14,13 @@ public class Config {
 
     public static void load() {
         // 保存写出配置文件，此处不会替换已经存在的配置
-        AfadianPay.getInstance().saveDefaultConfig();
-        File config = new File(AfadianPay.getInstance().getDataFolder(), "config.yml");
+        AFDianPay.getInstance().saveDefaultConfig();
+        File config = new File(AFDianPay.getInstance().getDataFolder(), "config.yml");
         YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
-        port = yamlConfiguration.getInt("afadian.callback.port");
-        path = yamlConfiguration.getString("afadian.callback.path");
-        multiplier = yamlConfiguration.getInt("afadian.multiplier");
-        AfadianPay.LOGGER.info(String.format("read config port:%d path:%s multiplier:%d", port, path, multiplier));
+        port = yamlConfiguration.getInt("afdian.callback.port");
+        path = yamlConfiguration.getString("afdian.callback.path");
+        multiplier = yamlConfiguration.getInt("afdian.multiplier");
+        AFDianPay.LOGGER.info(String.format("read config port:%d path:%s multiplier:%d", port, path, multiplier));
     }
 
     public static int getPort() {

@@ -1,7 +1,7 @@
 package com.imzcc.plugins;
 
 import com.imzcc.plugins.config.Config;
-import com.imzcc.plugins.controller.AfDianPayController;
+import com.imzcc.plugins.controller.AFDianPayController;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -9,10 +9,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-public class AfadianPay extends JavaPlugin implements Listener {
+public class AFDianPay extends JavaPlugin implements Listener {
     public static JavaPlugin instance;
     public static Logger LOGGER;
-    static AfDianPayController afDianPayController;
+    static AFDianPayController afDianPayController;
 
 
     @Override
@@ -24,7 +24,7 @@ public class AfadianPay extends JavaPlugin implements Listener {
 
         Config.load();
 
-        afDianPayController = new AfDianPayController();
+        afDianPayController = new AFDianPayController();
         afDianPayController.init();
     }
 

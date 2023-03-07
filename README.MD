@@ -1,6 +1,5 @@
-# LoginTitle - 登录标题
+# AfadianPay - 爱发电赞助插件
 
-> 在Waterfall跨服代理环境中，当玩家切换server时，向玩家发送一个标题“欢迎登陆到XXX”
+> 通过爱发电订单异步回调此插件的接口，配合经济插件，在服务器中自动发放点券
 
 - Jdk17
-- 支持Waterfall跨服代理
