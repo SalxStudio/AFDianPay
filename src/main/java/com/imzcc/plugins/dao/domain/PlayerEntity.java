@@ -8,14 +8,14 @@ import java.util.UUID;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.table;
 
-public class Player {
+public class PlayerEntity {
 
 
     private UUID uuid;
     private String playerName;
     private String userId;
 
-    public Player(UUID uuid, String playerName, String userId) {
+    public PlayerEntity(UUID uuid, String playerName, String userId) {
         this.uuid = uuid;
         this.playerName = playerName;
         this.userId = userId;
@@ -53,7 +53,7 @@ public class Player {
                 .execute();
     }
 
-    public static Player findByUuid(DSLContext dsl, UUID uuid) {
+    public static PlayerEntity findByUuid(DSLContext dsl, UUID uuid) {
         Record record = dsl.select()
                 .from(table("player"))
                 .where(field("uuid").eq(uuid.toString()))
@@ -61,7 +61,7 @@ public class Player {
         if (record == null) {
             return null;
         }
-        return new Player(
+        return new PlayerEntity(
                 UUID.fromString(record.get("uuid", String.class)),
                 record.get("player_name", String.class),
                 record.get("user_id", String.class)

@@ -15,7 +15,7 @@ public class AFDianPay extends JavaPlugin {
     public static Logger LOGGER;
     public static Config config;
     static AFDianPayController afDianPayController;
-    static Connection connection;
+    public static Connection connection;
 
 
     @Override

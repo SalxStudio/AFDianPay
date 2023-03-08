@@ -1,5 +1,6 @@
 package com.imzcc.plugins.dao.connection;
 
+import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.config.Config;
 
 import java.sql.Connection;
@@ -15,7 +16,10 @@ public class JOOQConnection {
                 }
                 case "sqlite" -> {
                     Config.SQLite dbSqLite = db.getSqLite();
-                    return DriverManager.getConnection(String.format("jdbc:%s://%s", db.getType(), dbSqLite.getFilepath()));
+                    return DriverManager.getConnection(String.format("jdbc:%s://%s", db.getType(), AFDianPay.getInstance().getDataFolder() + "\\" + dbSqLite.getFilepath()));
+                }
+                default -> {
+                    return DriverManager.getConnection(String.format("jdbc:%s://%s", db.getType(), AFDianPay.getInstance().getDataFolder() + "\\" + "afdian.db"));
                 }
             }
         } catch (Exception e) {
