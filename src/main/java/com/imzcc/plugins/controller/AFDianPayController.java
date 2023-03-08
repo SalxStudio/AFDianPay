@@ -14,8 +14,8 @@ public class AFDianPayController {
 
     public void init() {
         try {
-            int port = Config.getPort();
-            String path = Config.getPath();
+            int port = Config.getInstance().callback.getPort();
+            String path = Config.getInstance().callback.getPath();
             httpServer = HttpServer.create(new InetSocketAddress(port), 0);
             httpServer.createContext("/callback/" + path, new AFDianPayHandler());
             httpServer.setExecutor(null);

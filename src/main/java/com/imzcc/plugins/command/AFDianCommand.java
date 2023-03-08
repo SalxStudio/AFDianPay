@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 
 public class AFDianCommand {
     public static boolean rechargePoints(String playerName, int amount) {
-        int finalAmount = amount * Config.getMultiplier();
+        int finalAmount = amount * Config.getInstance().getMultiplier();
         Bukkit.getScheduler().runTask(AFDianPay.getInstance(), () -> {
             if (StringUtils.isNotBlank(playerName)) {
                 AFDianPay.LOGGER.info(String.format(" %s will recharge %d points", playerName, amount));

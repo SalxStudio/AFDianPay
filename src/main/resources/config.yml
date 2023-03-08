@@ -1,8 +1,20 @@
+# 充值倍率，玩家充值金额 * 此倍率 = 发放的点券
+multiplier: 100
 # 爱发电填写的回调连接中的端口
 # 回调链接：服务器公网IP:port/callback/回调入口路径
 # 例子：http://example:6696/callback/myAfadianPayPath
-afdian:
-  callback:
-    port: 6696
-    path: "myAfadianPayPath"
-  multiplier: 100
+callback:
+  port: 6696
+  path: "myAfadianPayPath"
+db:
+  # MySQL or SQLite
+  type: MySQL
+  mysql:
+    host: "127.0.0.1"
+    port: "3306"
+    database: "afdianPay"
+    username: "root"
+    password: "root"
+  sqlite:
+    filename: "afdian.db"
+
