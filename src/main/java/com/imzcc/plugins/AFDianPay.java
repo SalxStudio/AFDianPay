@@ -22,6 +22,7 @@ public class AFDianPay extends JavaPlugin {
     public void onEnable() {
 //        this.getServer().getPluginManager().registerEvents(this, this);
         Objects.requireNonNull(getCommand("afdian")).setExecutor(new AFDianExecutor());
+        Objects.requireNonNull(getCommand("afdian")).setTabCompleter(new AFDianExecutor());
         LOGGER = getLogger();
         instance = this;
         LOGGER.info("AfadianPay has been enabled.");
@@ -31,7 +32,12 @@ public class AFDianPay extends JavaPlugin {
         afDianPayController = new AFDianPayController();
         afDianPayController.init();
 
-        connection = JOOQConnection.getConnection(config.getDb());
+        connection = JOOQConnection.getConnection();
+    }
+
+    public void reload() {
+        config = Config.getInstance();
+        connection = JOOQConnection.getConnection();
     }
 
     @Override

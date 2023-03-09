@@ -1,4 +1,4 @@
-package com.imzcc.plugins.controller.handler;
+package com.imzcc.plugins.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.imzcc.plugins.AFDianPay;
@@ -24,11 +24,17 @@ public class AFDianPayHandler implements HttpHandler {
             Integer code = jsonObject.getInteger("ec");
             assert 200 == code : String.format("回调数据，code [%s] is not 200", code);
             JSONObject order = jsonObject.getJSONObject("data").getJSONObject("order");
-            String totalAmount = order.getString("total_amount");
-            Double parseDouble = Double.parseDouble(totalAmount);
+            // 解析订单
+            String showAmount = order.getString("show_amount");
+            Double parseDouble = Double.parseDouble(showAmount);
+            // 金额需转整形，points插件不支持小数
             int amount = parseDouble.intValue();
             String playerName = order.getString("remark");
-            boolean b = AFDianCommand.rechargePoints(playerName, amount);
+            String userId = order.getString("user_id");
+
+            boolean b = AFDianCommand.rechargePoints(userId, playerName, amount);
+
+            // 返回响应，爱发电才能保存callback地址
             JSONObject object = new JSONObject();
             object.put("ec", 200);
             object.put("em", b);

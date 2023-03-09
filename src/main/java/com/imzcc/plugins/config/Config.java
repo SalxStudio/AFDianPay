@@ -2,6 +2,7 @@ package com.imzcc.plugins.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.imzcc.plugins.AFDianPay;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -19,21 +20,20 @@ public class Config {
         if (config != null) {
             return config;
         }
+        AFDianPay.getInstance().saveDefaultConfig();
         synchronized (Config.class) {
             if (config == null) {
-//                AFDianPay.getInstance().saveDefaultConfig();
-                Path path = Paths.get("D:\\WorkSpace\\IDEA\\AfadianPay\\src\\main\\resources", "config.yml");
+                Path path = Paths.get(AFDianPay.getInstance().getDataFolder().toString(), "config.yml");
                 File file = path.toFile();
-                Config load = null;
                 try {
                     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-                    load = mapper.readValue(file, Config.class);
+                    config = mapper.readValue(file, Config.class);
+                    return config;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                config = load;
             }
-            return config;
+            return null;
         }
     }
 
@@ -61,7 +61,7 @@ public class Config {
         this.db = db;
     }
 
-    public class Callback {
+    public static class Callback {
         private int port;
         private String path;
 
@@ -84,7 +84,7 @@ public class Config {
         // getters and setters
     }
 
-    public class MySQL {
+    public static class MySQL {
         private String host;
         private int port;
         private String database;
@@ -132,22 +132,22 @@ public class Config {
         }
     }
 
-    public class SQLite {
-        private String filepath;
+    public static class SQLite {
+        private String filename;
 
-        public String getFilepath() {
-            return filepath;
+        public String getFilename() {
+            return filename;
         }
 
-        public void setFilepath(String filepath) {
-            this.filepath = filepath;
+        public void setFilename(String filename) {
+            this.filename = filename;
         }
     }
 
-    public class DB {
+    public static class DB {
         private String type;
-        private MySQL mySQL;
-        private SQLite sqLite;
+        private MySQL mysql;
+        private SQLite sqlite;
 
         public String getType() {
             return type;
@@ -157,20 +157,20 @@ public class Config {
             this.type = type;
         }
 
-        public MySQL getMySQL() {
-            return mySQL;
+        public MySQL getMysql() {
+            return mysql;
         }
 
-        public void setMySQL(MySQL mySQL) {
-            this.mySQL = mySQL;
+        public void setMysql(MySQL mysql) {
+            this.mysql = mysql;
         }
 
-        public SQLite getSqLite() {
-            return sqLite;
+        public SQLite getSqlite() {
+            return sqlite;
         }
 
-        public void setSqLite(SQLite sqLite) {
-            this.sqLite = sqLite;
+        public void setSqlite(SQLite sqlite) {
+            this.sqlite = sqlite;
         }
     }
 }

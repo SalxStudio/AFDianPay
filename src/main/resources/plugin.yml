@@ -1,5 +1,10 @@
-name: AfadianPay
+name: AFDianPay
 version: 1.0
-main: com.imzcc.plugins.AfadianPay
+main: com.imzcc.plugins.AFDianPay
 author: IMZCC
 api-version: 1.17
+
+commands:
+  afdian:
+    usage: /afdian bind user_id
+    description: "绑定爱发电user_id"

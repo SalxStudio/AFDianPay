@@ -45,18 +45,42 @@ public class PlayerEntity {
         this.userId = userId;
     }
 
-    public void save(DSLContext dsl) {
-        dsl.insertInto(table("player"))
+    public boolean save(DSLContext dsl) {
+        int execute = dsl.insertInto(table("player"))
                 .set(field("uuid"), uuid.toString())
                 .set(field("player_name"), playerName)
                 .set(field("user_id"), userId)
                 .execute();
+        return execute > 0;
+    }
+
+    public boolean update(DSLContext dsl) {
+        int execute = dsl.update(table("player"))
+                .set(field("user_id"), userId)
+                .where(field("uuid").eq(uuid.toString()))
+                .execute();
+        return execute > 0;
     }
 
     public static PlayerEntity findByUuid(DSLContext dsl, UUID uuid) {
         Record record = dsl.select()
                 .from(table("player"))
                 .where(field("uuid").eq(uuid.toString()))
+                .fetchOne();
+        if (record == null) {
+            return null;
+        }
+        return new PlayerEntity(
+                UUID.fromString(record.get("uuid", String.class)),
+                record.get("player_name", String.class),
+                record.get("user_id", String.class)
+        );
+    }
+
+    public static PlayerEntity findByUserId(DSLContext dsl, String userId) {
+        Record record = dsl.select()
+                .from(table("player"))
+                .where(field("user_id").eq(userId))
                 .fetchOne();
         if (record == null) {
             return null;
