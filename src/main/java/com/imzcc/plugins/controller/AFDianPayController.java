@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class AFDianPayController {
@@ -13,8 +14,9 @@ public class AFDianPayController {
 
     public void init() {
         try {
-            int port = Config.getInstance().callback.getPort();
-            String path = Config.getInstance().callback.getPath();
+            Config config = Objects.requireNonNull(Config.getInstance());
+            int port = config.callback.getPort();
+            String path = config.callback.getPath();
             httpServer = HttpServer.create(new InetSocketAddress(port), 0);
             httpServer.createContext("/callback/" + path, new AFDianPayHandler());
             httpServer.setExecutor(null);

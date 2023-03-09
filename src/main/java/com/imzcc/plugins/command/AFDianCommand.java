@@ -29,7 +29,7 @@ public class AFDianCommand {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("points give %s %d", playerEntity.getPlayerName(), finalAmount));
                 Player player = AFDianPay.getInstance().getServer().getPlayer(playerEntity.getUuid());
                 if (player != null && player.isOnline()) {
-                    player.sendMessage(String.format("你成功充值了￥[%d]，感谢您的支持！", amount));
+                    player.sendMessage(String.format("你成功赞助了￥[%d]，感谢您的支持！", amount));
                 } else {
                     AFDianPay.LOGGER.info(String.format("玩家：[%s]不在线，不发送消息了", playerEntity.getPlayerName()));
                 }
