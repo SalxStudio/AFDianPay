@@ -29,7 +29,7 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.19.3-R0.1-SNAPSHOT</version>
-            <!--            <scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
@@ -65,31 +65,6 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.12.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>2.12.3</version>
-        </dependency>
-
-
-        <!--        <dependency>-->
-        <!--            <groupId>io.github.waterfallmc</groupId>-->
-        <!--            <artifactId>waterfall-api</artifactId>-->
-        <!--            <version>1.19-R0.1-SNAPSHOT</version>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
-
     </dependencies>
 
     <build>
