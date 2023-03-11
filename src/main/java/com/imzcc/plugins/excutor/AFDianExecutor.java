@@ -2,16 +2,17 @@ package com.imzcc.plugins.excutor;
 
 import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.dao.domain.PlayerEntity;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-public class AFDianExecutor implements CommandExecutor, TabCompleter {
+public class AFDianExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (command.getName().equalsIgnoreCase("afdian")) {
@@ -62,17 +63,6 @@ public class AFDianExecutor implements CommandExecutor, TabCompleter {
             }
         }
         return false;
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        // 返回自动补全的建议列表
-        List<String> suggestions = new ArrayList<>();
-        if (args.length == 1) {
-            suggestions.add("bind");
-            suggestions.add("check");
-        }
-        return suggestions;
     }
 
 }

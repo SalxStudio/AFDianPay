@@ -2,6 +2,7 @@ package com.imzcc.plugins.dao.domain;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.impl.SQLDataType;
 
 import java.util.UUID;
 
@@ -90,5 +91,15 @@ public class PlayerEntity {
                 record.get("player_name", String.class),
                 record.get("user_id", String.class)
         );
+    }
+
+    public static boolean ensureTableExist(DSLContext dsl) {
+        int execute = dsl.createTableIfNotExists(table("player"))
+                .column("uuid", SQLDataType.VARCHAR(255).nullable(false))
+                .column("player_name", SQLDataType.VARCHAR(255).nullable(false))
+                .column("user_id", SQLDataType.VARCHAR(255).nullable(true))
+                .primaryKey("uuid")
+                .execute();
+        return execute > 0;
     }
 }

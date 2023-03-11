@@ -15,6 +15,3 @@ db:
     database: "afdianPay"
     username: "root"
     password: "root"
-  sqlite:
-    filename: "afdian.db"
-

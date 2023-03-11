@@ -6,17 +6,15 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.Objects;
 import java.util.logging.Level;
 
 public class AFDianPayController {
     HttpServer httpServer;
 
-    public void init() {
+    public AFDianPayController() {
         try {
-            Config config = Objects.requireNonNull(Config.getInstance());
-            int port = config.callback.getPort();
-            String path = config.callback.getPath();
+            int port = Config.AFDIANPAY_CALLBACK_PORT;
+            String path = Config.AFDIANPAY_CALLBACK_PATH;
             httpServer = HttpServer.create(new InetSocketAddress(port), 0);
             httpServer.createContext("/callback/" + path, new AFDianPayHandler());
             httpServer.setExecutor(null);
