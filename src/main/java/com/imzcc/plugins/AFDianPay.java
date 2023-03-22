@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AFDianPay extends JavaPlugin {
@@ -23,6 +24,7 @@ public class AFDianPay extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        Logger.getLogger("org.jooq.Constants").setLevel(Level.WARNING);
         instance = this;
         LOGGER = getLogger();
         config = new Config(this);

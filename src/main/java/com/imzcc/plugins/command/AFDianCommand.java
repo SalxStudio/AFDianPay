@@ -8,9 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
-
-import java.sql.Connection;
 
 public class AFDianCommand {
     public static boolean rechargePoints(String userId, String playerName, int amount) {
@@ -19,8 +16,7 @@ public class AFDianCommand {
             AFDianPay.LOGGER.info(String.format("从订单中获取到玩家：[%s]，金额：[%d]", playerName, amount));
             chargePlayerName = playerName;
         } else {
-            Connection connection = Database.getConnection();
-            DSLContext dslContext = DSL.using(connection);
+            DSLContext dslContext = Database.getDSLContext();
             PlayerEntity playerEntity = PlayerEntity.findByUserId(dslContext, userId);
             if (playerEntity == null) {
                 AFDianPay.LOGGER.info(String.format("爱发电用户：[%s]，金额：[%d]，未在游戏中绑定", userId, amount));
