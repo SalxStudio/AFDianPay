@@ -2,7 +2,7 @@
 multiplier: 100
 # 爱发电填写的回调连接中的端口
 # 回调链接：服务器公网IP:port/callback/回调入口路径
-# 例子：http://example:6696/callback/myAfadianPayPath
+# 例子： http://example:6696/callback/myAfadianPayPath
 callback:
   port: 6696
   path: "myAfadianPayPath"
