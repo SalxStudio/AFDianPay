@@ -6,11 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: AFDianPay自动构建
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -31,5 +29,4 @@ jobs:
       run: mvn -B package --file pom.xml
     - uses: actions/upload-artifact@v3
       with:
-        name: AFDianPay
         path: target/*.jar
