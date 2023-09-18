@@ -1,8 +1,8 @@
-package com.imzcc.plugins.dao;
+package com.imzcc.plugins.utils;
 
 import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.config.Config;
-import com.imzcc.plugins.dao.domain.PlayerEntity;
+import com.imzcc.plugins.pojo.dao.DBPlayer;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 
@@ -10,11 +10,11 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Database {
+public class DatabaseUtils {
     public static Connection connection;
 
     public static void initTable() {
-        PlayerEntity.ensureTableExist(getDSLContext());
+        DBPlayer.ensureTableExist(getDSLContext());
     }
 
     public enum DatabaseType {

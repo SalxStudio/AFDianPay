@@ -1,17 +1,13 @@
 package com.imzcc.plugins;
 
+import com.imzcc.plugins.afdian.controller.AFDianPayController;
 import com.imzcc.plugins.config.Config;
-import com.imzcc.plugins.controller.AFDianPayController;
-import com.imzcc.plugins.dao.Database;
 import com.imzcc.plugins.excutor.AFDianExecutor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import com.imzcc.plugins.utils.DatabaseUtils;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,19 +25,8 @@ public class AFDianPay extends JavaPlugin {
         LOGGER = getLogger();
         config = new Config(this);
         afDianPayController = new AFDianPayController();
-        connection = Database.getConnection();
-        Database.initTable();
-
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        List<String> suggestions = new ArrayList<>();
-        if (args.length == 1) {
-            suggestions.add("bind");
-            suggestions.add("check");
-        }
-        return suggestions;
+        connection = DatabaseUtils.getConnection();
+        DatabaseUtils.initTable();
     }
 
     @Override

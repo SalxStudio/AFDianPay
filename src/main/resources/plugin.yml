@@ -8,3 +8,9 @@ commands:
   afdian:
     usage: /afdian bind user_id
     description: "绑定爱发电user_id"
+
+
+permissions:
+  afdianpay.admin:
+    description: "允许使用爱发电支付的管理员"
+    default: op

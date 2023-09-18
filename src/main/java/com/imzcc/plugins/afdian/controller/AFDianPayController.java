@@ -1,4 +1,4 @@
-package com.imzcc.plugins.controller;
+package com.imzcc.plugins.afdian.controller;
 
 import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.config.Config;
@@ -7,8 +7,11 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AFDianPayController {
+
+    private static final Logger LOGGER = AFDianPay.LOGGER;
     HttpServer httpServer;
 
     public AFDianPayController() {
@@ -19,9 +22,9 @@ public class AFDianPayController {
             httpServer.createContext("/callback/" + path, new AFDianPayHandler());
             httpServer.setExecutor(null);
             httpServer.start();
-            AFDianPay.LOGGER.info(String.format("HttpServer started on port %s", port));
+            LOGGER.info(String.format("HttpServer started on port %s", port));
         } catch (IOException e) {
-            AFDianPay.LOGGER.log(Level.SEVERE, "启动HttpServer失败", e);
+            LOGGER.log(Level.SEVERE, "启动HttpServer失败", e);
         }
     }
 
