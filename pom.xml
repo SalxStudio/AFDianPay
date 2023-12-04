@@ -132,66 +132,66 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                <version>${jooq-version}</version>
+<!--            <plugin>-->
+<!--                <groupId>org.jooq</groupId>-->
+<!--                <artifactId>jooq-codegen-maven</artifactId>-->
+<!--                <version>${jooq-version}</version>-->
 
-                <executions>
-                    <execution>
-                        <id>jooq-codegen</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>jooq-codegen</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
 
-                <configuration>
-                    <jdbc>
-<!--                        <driver>com.mysql.cj.jdbc.Driver</driver>-->
-                        <url>jdbc:sqlite://D:/WorkSpace/IDEA/AFDianPay/src/main/resources/afdian.db</url>
-<!--                        <user>root</user>-->
-<!--                        <password></password>-->
-                    </jdbc>
+<!--                <configuration>-->
+<!--                    <jdbc>-->
+<!--&lt;!&ndash;                        <driver>com.mysql.cj.jdbc.Driver</driver>&ndash;&gt;-->
+<!--                        <url>jdbc:sqlite://D:/WorkSpace/IDEA/AFDianPay/src/main/resources/afdian.db</url>-->
+<!--&lt;!&ndash;                        <user>root</user>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <password></password>&ndash;&gt;-->
+<!--                    </jdbc>-->
 
-                    <generator>
-                        <name>org.jooq.codegen.JavaGenerator</name>
-                        <generate>
-                            <pojos>true</pojos>
-                            <interfaces>true</interfaces>
-                            <daos>true</daos>
-                        </generate>
-                        <database>
-                            <!-- The database type. The format here is:
-                                 org.jooq.meta.[database].[database]Database -->
-                            <name>org.jooq.meta.sqlite.SQLiteDatabase</name>
+<!--                    <generator>-->
+<!--                        <name>org.jooq.codegen.JavaGenerator</name>-->
+<!--                        <generate>-->
+<!--                            <pojos>true</pojos>-->
+<!--                            <interfaces>true</interfaces>-->
+<!--                            <daos>true</daos>-->
+<!--                        </generate>-->
+<!--                        <database>-->
+<!--                            &lt;!&ndash; The database type. The format here is:-->
+<!--                                 org.jooq.meta.[database].[database]Database &ndash;&gt;-->
+<!--                            <name>org.jooq.meta.sqlite.SQLiteDatabase</name>-->
 
-                            <!-- The database schema (or in the absence of schema support, in your RDBMS this
-                                 can be the owner, user, database name) to be generated -->
-<!--                            <inputSchema></inputSchema>-->
+<!--                            &lt;!&ndash; The database schema (or in the absence of schema support, in your RDBMS this-->
+<!--                                 can be the owner, user, database name) to be generated &ndash;&gt;-->
+<!--&lt;!&ndash;                            <inputSchema></inputSchema>&ndash;&gt;-->
 
-                            <!-- All elements that are generated from your schema
-                                 (A Java regular expression. Use the pipe to separate several expressions)
-                                 Watch out for case-sensitivity. Depending on your database, this might be important! -->
-                            <includes>.*</includes>
+<!--                            &lt;!&ndash; All elements that are generated from your schema-->
+<!--                                 (A Java regular expression. Use the pipe to separate several expressions)-->
+<!--                                 Watch out for case-sensitivity. Depending on your database, this might be important! &ndash;&gt;-->
+<!--                            <includes>.*</includes>-->
 
-                            <!-- All elements that are excluded from your schema
-                                 (A Java regular expression. Use the pipe to separate several expressions).
-                                 Excludes match before includes, i.e. excludes have a higher priority -->
-                            <excludes></excludes>
-                        </database>
+<!--                            &lt;!&ndash; All elements that are excluded from your schema-->
+<!--                                 (A Java regular expression. Use the pipe to separate several expressions).-->
+<!--                                 Excludes match before includes, i.e. excludes have a higher priority &ndash;&gt;-->
+<!--                            <excludes></excludes>-->
+<!--                        </database>-->
 
-                        <target>
-                            <!-- The destination package of your generated classes (within the destination directory) -->
-                            <packageName>com.imzcc.plugins.module.jooq</packageName>
+<!--                        <target>-->
+<!--                            &lt;!&ndash; The destination package of your generated classes (within the destination directory) &ndash;&gt;-->
+<!--                            <packageName>com.imzcc.plugins.module.jooq</packageName>-->
 
-                            <!-- The destination directory of your generated classes. Using Maven directory layout here -->
-                            <directory>D:/WorkSpace/IDEA/AFDianPay/src/main/java</directory>
-                        </target>
-                    </generator>
-                </configuration>
-            </plugin>
+<!--                            &lt;!&ndash; The destination directory of your generated classes. Using Maven directory layout here &ndash;&gt;-->
+<!--                            <directory>D:/WorkSpace/IDEA/AFDianPay/src/main/java</directory>-->
+<!--                        </target>-->
+<!--                    </generator>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>
