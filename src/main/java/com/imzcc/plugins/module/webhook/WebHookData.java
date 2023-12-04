@@ -1,4 +1,4 @@
-package com.imzcc.plugins.pojo;// WebHookData.java
+package com.imzcc.plugins.module.webhook;// WebHookData.java
 
 
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import lombok.Setter;
 public class WebHookData {
     private long ec;
     private String em;
-    private Data data;
+    private CallBackData data;
+
 }
 

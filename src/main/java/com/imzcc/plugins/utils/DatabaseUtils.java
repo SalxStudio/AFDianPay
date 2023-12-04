@@ -2,9 +2,6 @@ package com.imzcc.plugins.utils;
 
 import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.config.Config;
-import com.imzcc.plugins.pojo.dao.DBPlayer;
-import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
 
 import java.io.File;
 import java.sql.Connection;
@@ -13,15 +10,11 @@ import java.sql.DriverManager;
 public class DatabaseUtils {
     public static Connection connection;
 
-    public static void initTable() {
-        DBPlayer.ensureTableExist(getDSLContext());
-    }
-
     public enum DatabaseType {
         MySQL, SQLite
     }
 
-    public static Connection getConnection() {
+    public static Connection getConnection(Config config) {
         if (connection == null) {
             try {
                 switch (Config.DATABASE_TYPE) {
@@ -35,15 +28,15 @@ public class DatabaseUtils {
                     }
                     case SQLite -> {
                         String dbName = "afdian.db";
-                        File dbFile = new File(AFDianPay.getInstance().getDataFolder(), dbName);
+                        File dbFile = new File(AFDianPay.instance.getDataFolder(), dbName);
                         if (!dbFile.exists()) {
                             boolean b = dbFile.createNewFile();
                         }
                         Class.forName("org.sqlite.JDBC");
-                        connection = DriverManager.getConnection(String.format("jdbc:sqlite://%s", AFDianPay.getInstance().getDataFolder().getAbsoluteFile() + File.separator + dbName));
+                        connection = DriverManager.getConnection(String.format("jdbc:sqlite://%s", AFDianPay.instance.getDataFolder().getAbsoluteFile() + File.separator + dbName));
                     }
                     default -> {
-                        connection = DriverManager.getConnection(String.format("jdbc:sqlite://%s", AFDianPay.getInstance().getDataFolder().getAbsoluteFile() + File.separator + "afdian.db"));
+                        connection = DriverManager.getConnection(String.format("jdbc:sqlite://%s", AFDianPay.instance.getDataFolder().getAbsoluteFile() + File.separator + "afdian.db"));
                     }
                 }
                 return connection;
@@ -53,9 +46,5 @@ public class DatabaseUtils {
             return null;
         }
         return connection;
-    }
-
-    public static DSLContext getDSLContext() {
-        return DSL.using(getConnection());
     }
 }

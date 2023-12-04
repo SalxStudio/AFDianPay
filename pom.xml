@@ -12,6 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jooq-version>3.17.8</jooq-version>
     </properties>
     <repositories>
         <repository>
@@ -28,7 +29,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.3-R0.1-SNAPSHOT</version>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -46,12 +47,19 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
-            <version>3.17.8</version>
+            <version>${jooq-version}</version>
         </dependency>
+
+        <!-- These may not be required, unless you use the GenerationTool manually for code generation -->
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-meta</artifactId>
-            <version>3.14.8</version>
+            <version>${jooq-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>${jooq-version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
@@ -72,6 +80,19 @@
             <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -109,6 +130,67 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>${jooq-version}</version>
+
+                <executions>
+                    <execution>
+                        <id>jooq-codegen</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <jdbc>
+<!--                        <driver>com.mysql.cj.jdbc.Driver</driver>-->
+                        <url>jdbc:sqlite://D:/WorkSpace/IDEA/AFDianPay/src/main/resources/afdian.db</url>
+<!--                        <user>root</user>-->
+<!--                        <password></password>-->
+                    </jdbc>
+
+                    <generator>
+                        <name>org.jooq.codegen.JavaGenerator</name>
+                        <generate>
+                            <pojos>true</pojos>
+                            <interfaces>true</interfaces>
+                            <daos>true</daos>
+                        </generate>
+                        <database>
+                            <!-- The database type. The format here is:
+                                 org.jooq.meta.[database].[database]Database -->
+                            <name>org.jooq.meta.sqlite.SQLiteDatabase</name>
+
+                            <!-- The database schema (or in the absence of schema support, in your RDBMS this
+                                 can be the owner, user, database name) to be generated -->
+<!--                            <inputSchema></inputSchema>-->
+
+                            <!-- All elements that are generated from your schema
+                                 (A Java regular expression. Use the pipe to separate several expressions)
+                                 Watch out for case-sensitivity. Depending on your database, this might be important! -->
+                            <includes>.*</includes>
+
+                            <!-- All elements that are excluded from your schema
+                                 (A Java regular expression. Use the pipe to separate several expressions).
+                                 Excludes match before includes, i.e. excludes have a higher priority -->
+                            <excludes></excludes>
+                        </database>
+
+                        <target>
+                            <!-- The destination package of your generated classes (within the destination directory) -->
+                            <packageName>com.imzcc.plugins.module.jooq</packageName>
+
+                            <!-- The destination directory of your generated classes. Using Maven directory layout here -->
+                            <directory>D:/WorkSpace/IDEA/AFDianPay/src/main/java</directory>
+                        </target>
+                    </generator>
+                </configuration>
             </plugin>
         </plugins>
     </build>

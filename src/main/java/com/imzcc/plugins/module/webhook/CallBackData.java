@@ -1,5 +1,6 @@
-package com.imzcc.plugins.pojo;
+package com.imzcc.plugins.module.webhook;
 
+import com.imzcc.plugins.module.jooq.tables.records.AfdianOrderRecord;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Data {
+public class CallBackData {
     private String type;
-    private Order order;
+    private AfdianOrderRecord order;
 }

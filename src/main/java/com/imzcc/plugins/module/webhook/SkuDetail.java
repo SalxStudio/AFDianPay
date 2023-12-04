@@ -1,4 +1,4 @@
-package com.imzcc.plugins.pojo;
+package com.imzcc.plugins.module.webhook;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

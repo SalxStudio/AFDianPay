@@ -2,10 +2,9 @@ package com.imzcc.plugins.afdian.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.imzcc.plugins.AFDianPay;
+import com.imzcc.plugins.module.jooq.tables.records.AfdianOrderRecord;
 import com.imzcc.plugins.utils.AFDianCommandUtil;
-import com.imzcc.plugins.pojo.Order;
-import com.imzcc.plugins.pojo.WebHookData;
-import com.imzcc.plugins.utils.DatabaseUtils;
+import com.imzcc.plugins.module.webhook.WebHookData;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -19,15 +18,14 @@ public class AFDianPayHandler implements HttpHandler {
         if ("POST".equals(exchange.getRequestMethod())) {
             // 读取POST请求的数据
             InputStream is = exchange.getRequestBody();
-            byte[] bytes = new byte[is.available()];
-            String json = new String(bytes);
+            String json = new String(is.readAllBytes());
             AFDianPay.LOGGER.info("Received data: " + json);
             WebHookData webHookData = JSONObject.parseObject(json, WebHookData.class);
             long ec = webHookData.getEc();
             assert 200 == ec : String.format("回调数据，code [%s] is not 200", ec);
-            Order order = webHookData.getData().getOrder();
+            AfdianOrderRecord order = webHookData.getData().getOrder();
 
-            boolean b = AFDianCommandUtil.rechargePoints(order);
+            Boolean b = AFDianCommandUtil.rechargePoints(order);
 
             // 返回响应，爱发电才能保存callback地址
             JSONObject object = new JSONObject();

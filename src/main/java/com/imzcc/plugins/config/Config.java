@@ -4,7 +4,8 @@ import com.imzcc.plugins.AFDianPay;
 import com.imzcc.plugins.utils.DatabaseUtils;
 
 public class Config {
-    private final AFDianPay plugin;
+    public static String AFDIANPAY_USER_ID;
+    public static String AFDIANPAY_TOKEN;
     public static String AFDIANPAY_EXECUTE_COMMAND;
     public static int AFDIANPAY_CALLBACK_MULTIPLIER;
     public static int AFDIANPAY_CALLBACK_PORT;
@@ -16,24 +17,19 @@ public class Config {
     public static String MYSQL_USERNAME;
     public static String MYSQL_PASSWORD;
 
-    public Config(AFDianPay afDianPay) {
+    public static void init(AFDianPay afDianPay) {
         afDianPay.saveDefaultConfig();
-        this.plugin = afDianPay;
-        reload();
+        AFDIANPAY_TOKEN = afDianPay.getConfig().getString("token");
+        AFDIANPAY_USER_ID = afDianPay.getConfig().getString("user_id");
+        AFDIANPAY_CALLBACK_MULTIPLIER = afDianPay.getConfig().getInt("multiplier");
+        AFDIANPAY_EXECUTE_COMMAND = afDianPay.getConfig().getString("execute_command");
+        AFDIANPAY_CALLBACK_PORT = afDianPay.getConfig().getInt("callback.port");
+        AFDIANPAY_CALLBACK_PATH = afDianPay.getConfig().getString("callback.path");
+        DATABASE_TYPE = DatabaseUtils.DatabaseType.valueOf(afDianPay.getConfig().getString("db.type"));
+        MYSQL_HOST = afDianPay.getConfig().getString("db.mysql.host");
+        MYSQL_PORT = afDianPay.getConfig().getInt("db.mysql.port");
+        MYSQL_DATABASE = afDianPay.getConfig().getString("db.mysql.database");
+        MYSQL_USERNAME = afDianPay.getConfig().getString("db.mysql.username");
+        MYSQL_PASSWORD = afDianPay.getConfig().getString("db.mysql.password");
     }
-
-    private void reload() {
-        this.plugin.reloadConfig();
-        AFDIANPAY_CALLBACK_MULTIPLIER = this.plugin.getConfig().getInt("multiplier");
-        AFDIANPAY_EXECUTE_COMMAND = this.plugin.getConfig().getString("execute_command");
-        AFDIANPAY_CALLBACK_PORT = this.plugin.getConfig().getInt("callback.port");
-        AFDIANPAY_CALLBACK_PATH = this.plugin.getConfig().getString("callback.path");
-        DATABASE_TYPE = DatabaseUtils.DatabaseType.valueOf(this.plugin.getConfig().getString("db.type"));
-        MYSQL_HOST = this.plugin.getConfig().getString("db.mysql.host");
-        MYSQL_PORT = this.plugin.getConfig().getInt("db.mysql.port");
-        MYSQL_DATABASE = this.plugin.getConfig().getString("db.mysql.database");
-        MYSQL_USERNAME = this.plugin.getConfig().getString("db.mysql.username");
-        MYSQL_PASSWORD = this.plugin.getConfig().getString("db.mysql.password");
-    }
-
 }

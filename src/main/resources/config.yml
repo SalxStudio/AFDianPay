@@ -11,6 +11,9 @@ callback:
   port: 6696
   path: "myAfadianPayPath"
 
+user_id: "92529d7c217111ea9c6952540025c377"
+token: "ypWHkKc7C9gTxXh8FDt4mYfEQsMauJUr"
+
 db:
   # MySQL or SQLite
   type: SQLite
